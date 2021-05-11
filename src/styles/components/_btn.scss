@@ -1,0 +1,15 @@
+// Button
+.btn {
+  display: inline-block;
+  text-align: center;
+  font-size: inherit;
+  line-height: 1;
+  border: none;
+  background-color: transparent;
+  outline: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition-property: box-shadow, background-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}

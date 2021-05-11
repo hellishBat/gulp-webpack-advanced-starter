@@ -1,0 +1,88 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint==min-xs {
+    @media only screen and (min-width: $media-xs+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==min-sm {
+    @media only screen and (min-width: $media-sm+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==min-md {
+    @media only screen and (min-width: $media-md+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==min-lg {
+    @media only screen and (min-width: $media-lg+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==max-lg {
+    @media only screen and (max-width: $media-lg+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==max-md {
+    @media only screen and (max-width: $media-md+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==max-sm {
+    @media only screen and (max-width: $media-sm+px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==max-xs {
+    @media only screen and (max-width: $media-xs+px) {
+      @content;
+    }
+  }
+}
+
+@mixin font-face($font-family, $url, $weight) {
+  @font-face {
+    font-family: "#{$font-family}";
+    src: url("../fonts/#{$url}.woff2") format("woff2"),
+    url("../fonts/#{$url}.woff") format("woff"),
+    url("../fonts/#{$url}.ttf") format("truetype");
+    font-weight: #{$weight};
+    font-display: swap;
+    font-style: normal;
+  }
+}
+
+@mixin font-size($font-size, $line-height: normal, $letter-spacing: normal) {
+  font-size: $font-size * 1px;
+  // font-size: $font-size * 0.1rem;
+  // example using rem values and 62.5% font-size so 1rem = 10px
+
+  @if $line-height==normal {
+    line-height: normal;
+  }
+
+  @else {
+    line-height: $line-height;
+  }
+
+  @if $letter-spacing==normal {
+    letter-spacing: normal;
+  }
+
+  @else {
+    letter-spacing: $letter-spacing;
+  }
+}
+
+@mixin flexbox() {
+  display: flex;
+  font-size: 0;
+}

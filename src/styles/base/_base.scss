@@ -1,0 +1,54 @@
+html,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  font-family: $default-font;
+  line-height: 1.2;
+  overflow-x: hidden;
+
+  @include respond(max-md) {
+    &.lock {
+      overflow: hidden;
+    }
+  }
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+svg {
+  fill: currentColor;
+}
+
+::selection {
+  background-color: $primary-accent;
+}
