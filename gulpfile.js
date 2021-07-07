@@ -106,9 +106,6 @@ const styles = () => {
     .pipe(autoprefixer({
       cascade: false
     }))
-    .pipe(autoprefixer({
-      cascade: false
-    }))
     .pipe(gulpif(production, csso()))
     .pipe(gulpif(production, rename({
       suffix: '.min'
