@@ -107,7 +107,9 @@ const styles = () => {
     }))
     .pipe(groupMedia())
     .pipe(postcss([
-      autoprefixer()
+      autoprefixer({
+        cascade: false
+      })
     ]))
     .pipe(gulpif(production, csso()))
     .pipe(gulpif(production, rename({
