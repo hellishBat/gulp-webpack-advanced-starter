@@ -1,23 +1,25 @@
-module.exports = {
+const config = {
   output: {
-    filename: "[name].js",
+    filename: '[name].js'
   },
   module: {
     rules: [{
       test: /\.js$/,
-      exclude: "/node_modules/",
-      loader: "babel-loader",
+      use: 'babel-loader',
+      exclude: /node_modules/
     }]
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
+        vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "initial",
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
-  },
+  }
 };
+
+module.exports = config;

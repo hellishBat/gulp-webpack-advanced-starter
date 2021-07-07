@@ -1,1 +1,80 @@
 // Header
+.header {
+  position: absolute;
+  flex: 0 0 auto;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.5s ease 0s;
+
+  &__link {
+    transition: color 0.3s ease 0s;
+
+    @include respond(min-md) {
+      &:hover {
+        & {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &__menu-btn {
+    display: none;
+  }
+
+  @include respond(max-md) {
+    &__menu-btn {
+      position: relative;
+      display: block;
+      z-index: 103;
+      width: 1.875rem;
+      height: 1.125rem;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      outline: none;
+
+      &.active {
+        .header__line:first-child {
+          top: 0.5rem;
+          transform: rotate(-45deg);
+        }
+
+        .header__line:nth-child(2) {
+          transform: scale(0);
+        }
+
+        .header__line:last-child {
+          bottom: 0.5rem;
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    &__line {
+      position: absolute;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 0.125rem;
+      border-radius: 0.094rem;
+      background-color: $white;
+      transition: transform 0.3s ease 0s;
+
+      &:first-child {
+        top: 0;
+      }
+
+      &:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &:last-child {
+        bottom: 0;
+      }
+    }
+  }
+}

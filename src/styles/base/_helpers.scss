@@ -1,20 +1,4 @@
-.wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-  overflow: hidden;
-}
-
-.page {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-}
-
+// Helpers
 .container {
   max-width: $max-width + px;
   margin: 0 auto;
@@ -39,8 +23,8 @@
   }
 }
 
-.d-b {
-  display: block;
+.d-g {
+  display: grid;
 }
 
 .d-f {
@@ -71,23 +55,63 @@
   flex-direction: column;
 }
 
+.fd-rr {
+  flex-direction: row-reverse;
+}
+
 .fxw-w {
   flex-wrap: wrap;
 }
 
-.flex-wrapper {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+.ovl-50 {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, rgba(15, 15, 15, 0.5), rgba(15, 15, 15, 0.5));
+    content: "";
+  }
 }
 
-.sr-only {
-  display: block;
-  font-size: 0;
-  line-height: 0;
-  width: 0;
+.ar-16-9 {
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-top: (9 / 16) * 100%;
+  overflow: hidden;
+
+  &>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.fw-bold {
-  font-weight: 700;
+.ar-1-1 {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: (1 / 1) * 100%;
+  }
+
+  &>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+  }
 }
