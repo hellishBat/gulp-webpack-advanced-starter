@@ -17,8 +17,7 @@ const pug = require('gulp-pug');
 const pugLinter = require('gulp-pug-linter');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('gulp-autoprefixer');
 const groupMedia = require("gulp-group-css-media-queries");
 const csso = require('gulp-csso');
 const webpack = require('webpack');
@@ -38,14 +37,12 @@ const path = {
     src: ['./src/pages/*.pug',
       '!./src/pages/**/_*.pug'
     ],
-    dist: './dist',
-    dist_files: './dist/*.html',
+    dist: "./dist",
     watch: './src/pages/**/*.pug',
   },
   styles: {
     src: './src/styles/main.{scss,sass}',
     dist: './dist/styles/',
-    dist_files: './dist/styles/*.css',
     watch: './src/styles/**/*.{scss,sass}',
   },
   scripts: {
@@ -55,7 +52,7 @@ const path = {
   },
   resources: {
     src: './src/resources/**',
-    dist: './dist',
+    dist: './dist/',
     watch: './src/resources/**',
   },
   fonts: {
@@ -106,11 +103,12 @@ const styles = () => {
       outputStyle: 'expanded'
     }))
     .pipe(groupMedia())
-    .pipe(postcss([
-      autoprefixer({
-        cascade: false
-      })
-    ]))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
     .pipe(gulpif(production, csso()))
     .pipe(gulpif(production, rename({
       suffix: '.min'
@@ -306,9 +304,7 @@ const watchFiles = (cb) => {
   })
 
   watch(path.pages.watch, pages);
-  watch(path.styles.watch, styles, purgeStyles);
-  // watch(path.styles.watch, purgeStyles);
-
+  watch(path.styles.watch, styles);
   watch(path.scripts.watch, scripts);
   watch(path.resources.watch, resources);
   watch(path.fonts.watch, fonts);
