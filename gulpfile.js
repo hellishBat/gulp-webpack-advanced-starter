@@ -17,7 +17,8 @@ const pug = require('gulp-pug');
 const pugLinter = require('gulp-pug-linter');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
 const groupMedia = require("gulp-group-css-media-queries");
 const csso = require('gulp-csso');
 const webpack = require('webpack');
@@ -37,12 +38,14 @@ const path = {
     src: ['./src/pages/*.pug',
       '!./src/pages/**/_*.pug'
     ],
-    dist: "./dist",
+    dist: './dist',
+    dist_files: './dist/*.html',
     watch: './src/pages/**/*.pug',
   },
   styles: {
     src: './src/styles/main.{scss,sass}',
     dist: './dist/styles/',
+    dist_files: './dist/styles/*.css',
     watch: './src/styles/**/*.{scss,sass}',
   },
   scripts: {
@@ -81,7 +84,6 @@ const pages = () => {
     .pipe(plumber({
       errorHandler: onError
     }))
-
     .pipe(pugLinter({
       reporter: 'default'
     }))
@@ -103,15 +105,15 @@ const styles = () => {
       includePaths: ['node_modules'],
       outputStyle: 'expanded'
     }))
-    .pipe(autoprefixer({
-      cascade: false,
-    }))
-    .pipe(gulpif(!production, sourcemaps.write()))
     .pipe(groupMedia())
+    .pipe(postcss([
+      autoprefixer()
+    ]))
     .pipe(gulpif(production, csso()))
     .pipe(gulpif(production, rename({
-      suffix: ".min"
+      suffix: '.min'
     })))
+    .pipe(gulpif(!production, sourcemaps.write('.')))
     .pipe(dest(path.styles.dist))
     .pipe(browserSync.stream());
 }
@@ -302,7 +304,9 @@ const watchFiles = (cb) => {
   })
 
   watch(path.pages.watch, pages);
-  watch(path.styles.watch, styles);
+  watch(path.styles.watch, styles, purgeStyles);
+  // watch(path.styles.watch, purgeStyles);
+
   watch(path.scripts.watch, scripts);
   watch(path.resources.watch, resources);
   watch(path.fonts.watch, fonts);
