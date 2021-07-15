@@ -47,6 +47,8 @@
     "gulp-svg-sprite": "^1.5.0",
     "gulp-ttf2woff": "^1.1.1",
     "gulp-ttf2woff2": "^4.0.1",
+    "imagemin-jpeg-recompress": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "node-sass": "^5.0.0",
     "webpack": "^5.21.2",
     "webpack-stream": "^6.1.2",
